@@ -38,5 +38,44 @@ class Graph {
     helper(vertex);
     return results;
   }
+
+  iterativeDFS(vertex) {
+    let stack = [];
+    let visited = {};
+    let results = [];
+    stack.push(vertex);
+
+    while (stack.length) {
+      let current = stack.pop();
+      results.push(current);
+      visited[current] = true;
+      this.adjacencyList[current].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          stack.push(neighbor);
+        }
+      });
+    }
+
+    return results;
+  }
+
+  BFS(vertex) {
+    let results = [];
+    let queue = [];
+    let visited = {};
+    queue.push(vertex);
+
+    while(queue.length > 0) {
+      let current = queue.shift();
+      results.push(current);
+      visited[current] = true;
+      this.adjacencyList[current].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          queue.push(neighbor);
+        }
+      });
+    }
+    return results;
+  }
 }
 
